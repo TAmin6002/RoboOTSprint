@@ -1,0 +1,1596 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>پنجره‌ای به‌سوی OT | سمینار آشنایی با OT و امنیت OT</title>
+  <meta name="description" content="سه روز آشنایی با فناوری عملیاتی (OT) و امنیت آن، با مدرسی از دل صنعت. ۱۳ تا ۱۵ آبان، آمفی‌تئاتر دانشکده مهندسی؛ حضوری و آنلاین.">
+  <meta name="theme-color" content="#0E0F11">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+/* Vazirmatn (SIL OFL) — variable font, Persian + Latin. Self-hosted so the site works offline. */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("assets/fonts/Vazirmatn-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design tokens — the single source of truth for colour, type, spacing and motion.
+   Change a value here and it updates everywhere. */
+:root {
+  /* Brand palette (orange / black / white) */
+  --c-orange: #ff7a3d;
+  --c-orange-hot: #f0501c;
+  --c-orange-ink: #b93d05;      /* orange dark enough for small text on light backgrounds */
+  --c-black: #0e0f11;
+  --c-black-2: #17181b;
+  --c-black-3: #222428;
+  --c-white: #f7f6f2;
+  --c-cream: #fce6d6;
+  --c-pure-white: #ffffff;
+
+  /* Semantic colours */
+  --text: var(--c-black);
+  --text-muted: #555960;
+  --text-on-dark: var(--c-white);
+  --text-muted-on-dark: rgba(247, 246, 242, 0.7);
+  --line-light: rgba(14, 15, 17, 0.12);
+  --line-dark: rgba(247, 246, 242, 0.14);
+
+  /* Typography */
+  --font-sans: "Vazirmatn", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
+  --fs-600: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+  --fs-700: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  --fs-800: clamp(2rem, 1.3rem + 2.6vw, 3.4rem);
+
+  /* Shape */
+  --radius-s: 10px;
+  --radius-m: 18px;
+  --radius-l: 28px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container: 1180px;
+  --gutter: clamp(20px, 4vw, 36px);
+  --section-pad: clamp(56px, 7.5vw, 92px);
+  --header-h: 68px;
+
+  /* Elevation */
+  --shadow-card: 0 14px 34px -16px rgba(14, 15, 17, 0.28);
+  --glow-orange: 0 0 60px rgba(255, 122, 61, 0.35);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --dur: 0.35s;
+
+  /* Hero / event orange field, modelled on the poster */
+  --gradient-orange: linear-gradient(165deg, #e9461a 0%, #f65f26 45%, #ff7a3d 100%);
+}
+
+/* Reset + element defaults + a few global utilities. No section-specific rules here. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-400);
+  line-height: 1.85;
+  color: var(--text);
+  background: var(--c-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, p, ul, ol, figure {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img, picture, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 3px solid var(--c-orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--c-orange);
+  color: var(--c-black);
+}
+
+/* ---- Utilities ---- */
+.container {
+  width: min(100% - var(--gutter) * 2, var(--container));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 12px;
+  top: -80px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--c-orange);
+  color: var(--c-black);
+  font-weight: 700;
+  border-radius: var(--radius-s);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Inline SVG icons (stroke style, inherit colour) */
+.icon {
+  width: 1.4em;
+  height: 1.4em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Shared building blocks used by more than one section:
+   buttons, section scaffolding, eyebrow labels, cards. */
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 20px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--sm {
+  padding: 6px 15px;
+  font-size: 0.8rem;
+}
+
+.btn--lg {
+  padding: 16px 38px;
+  font-size: var(--fs-500);
+}
+
+.btn--dark {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+.btn--dark:hover {
+  background: var(--c-black-3);
+}
+
+.btn--light {
+  background: var(--c-pure-white);
+  color: var(--c-black);
+}
+
+.btn--orange {
+  background: var(--c-orange);
+  color: var(--c-black);
+}
+.btn--orange:hover {
+  background: var(--c-pure-white);
+}
+
+.btn--outline-dark {
+  border-color: var(--c-black);
+  color: var(--c-black);
+}
+.btn--outline-dark:hover {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+/* ---------- Section scaffolding ---------- */
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+}
+
+.section--light {
+  background: var(--c-white);
+  color: var(--text);
+}
+
+.section--dark {
+  background: var(--c-black);
+  color: var(--text-on-dark);
+}
+
+.section__head {
+  max-width: 62ch;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.section__head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section__title {
+  font-size: var(--fs-800);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.section__lead {
+  margin-top: 20px;
+  font-size: var(--fs-500);
+  color: var(--text-muted);
+}
+
+.section--dark .section__lead {
+  color: var(--text-muted-on-dark);
+}
+
+/* Small label above a heading, with an orange tick (from the brand board) */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: var(--fs-300);
+  font-weight: 700;
+  color: var(--c-orange-ink);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--c-orange);
+}
+
+.section--dark .eyebrow {
+  color: var(--c-orange);
+}
+
+.eyebrow--dark {
+  color: var(--c-black);
+}
+.eyebrow--dark::before {
+  background: var(--c-black);
+}
+
+/* ---------- Card ---------- */
+.card {
+  position: relative;
+  padding: 28px 26px;
+  background: var(--c-pure-white);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-m);
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--c-orange);
+  box-shadow: var(--shadow-card);
+}
+
+.card__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  background: var(--c-black);
+  color: var(--c-orange);
+}
+
+.card__icon .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.card__title {
+  font-size: var(--fs-600);
+  font-weight: 800;
+}
+
+.card__text {
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+/* ---------- Header + navigation ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  background: rgba(14, 15, 17, 0.88);
+  border-bottom: 1px solid var(--line-dark);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--c-white);
+}
+
+.brand__mark {
+  display: inline-flex;
+  direction: ltr;
+  font-size: 1.9rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.brand__mark span:first-child {
+  color: var(--c-orange);
+}
+
+.brand__tag {
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid var(--line-dark);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted-on-dark);
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav__list a {
+  display: block;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-muted-on-dark);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.nav__list a:hover,
+.nav__list a.is-active {
+  color: var(--c-white);
+  background: rgba(247, 246, 242, 0.1);
+}
+
+.nav__list a.is-active {
+  color: var(--c-orange);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--c-white);
+}
+
+.nav-toggle .icon {
+  width: 26px;
+  height: 26px;
+}
+
+.nav-toggle__close {
+  display: none;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle__open {
+  display: none;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle__close {
+  display: block;
+}
+
+/* ---------- Mobile menu ---------- */
+@media (max-width: 920px) {
+  .brand__tag {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .nav {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    padding: 12px var(--gutter) 20px;
+    background: var(--c-black);
+    border-bottom: 1px solid var(--line-dark);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
+      visibility var(--dur);
+  }
+
+  .nav[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+  }
+
+  .nav__list a {
+    padding: 12px 14px;
+    font-size: 1rem;
+  }
+}
+
+/* ---------- About OT ---------- */
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 88px);
+}
+
+.about__text .section__title {
+  font-size: var(--fs-700);
+}
+
+.about__note {
+  margin-top: 16px;
+  padding-inline-start: 16px;
+  border-inline-start: 3px solid var(--c-orange);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.pills li {
+  padding: 6px 18px;
+  border: 1.5px solid var(--c-black);
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* ----- Sensor → PLC → Actuator chain ----- */
+.about__caption {
+  margin-bottom: 18px;
+  font-size: var(--fs-300);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.about__caption--foot {
+  margin: 22px 0 0;
+  font-weight: 500;
+}
+
+.chain {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.chain__item {
+  position: relative;
+  padding: 24px 16px 22px;
+  text-align: center;
+  background: var(--c-pure-white);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-m);
+}
+
+.chain__icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: 17px;
+  background: var(--c-black);
+  color: var(--c-orange);
+}
+
+.chain__icon .icon {
+  width: 28px;
+  height: 28px;
+}
+
+.chain__title {
+  font-size: var(--fs-600);
+  font-weight: 800;
+}
+
+.chain__text {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+/* Orange arrow between steps (points left in RTL, right in LTR) */
+.chain__item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-end: -30px;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--c-orange)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e0f11' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5M11 6l-6 6 6 6'/%3E%3C/svg%3E")
+    center / 18px no-repeat;
+}
+
+[dir="ltr"] .chain__item:not(:last-child)::after {
+  transform: translateY(-50%) scaleX(-1);
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .chain {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  /* arrow points down on mobile */
+  .chain__item:not(:last-child)::after {
+    top: auto;
+    bottom: -32px;
+    inset-inline-end: auto;
+    inset-inline-start: calc(50% - 15px);
+    transform: rotate(-90deg);
+  }
+
+  [dir="ltr"] .chain__item:not(:last-child)::after {
+    transform: rotate(90deg);
+  }
+}
+
+/* ---------- Goal ---------- */
+.goal {
+  overflow: hidden;
+}
+
+/* faint dot texture from the brand board */
+.goal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(247, 246, 242, 0.13) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(70% 80% at 85% 20%, #000, transparent 75%);
+  mask-image: radial-gradient(70% 80% at 85% 20%, #000, transparent 75%);
+  pointer-events: none;
+}
+
+.goal__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 88px);
+}
+
+.goal .section__title {
+  font-size: var(--fs-700);
+}
+
+.goal__list {
+  margin-top: 36px;
+}
+
+.goal__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 22px;
+  padding-block: 22px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.goal__item:last-child {
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.goal__num {
+  min-width: 2.4ch;
+  font-size: var(--fs-700);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--c-orange);
+}
+
+.goal__item h3 {
+  font-size: var(--fs-600);
+  font-weight: 800;
+}
+
+.goal__item p {
+  margin-top: 4px;
+  color: var(--text-muted-on-dark);
+}
+
+/* ----- Terminal card ----- */
+.goal__aside {
+  display: grid;
+  gap: 18px;
+}
+
+.goal__aside figcaption {
+  font-size: var(--fs-500);
+  font-weight: 700;
+  color: var(--c-white);
+  text-align: center;
+}
+
+.terminal {
+  overflow: hidden;
+  background: var(--c-black-2);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-m);
+  box-shadow: var(--glow-orange);
+}
+
+.terminal__bar {
+  display: flex;
+  gap: 7px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.terminal__bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-black-3);
+}
+
+.terminal__bar span:first-child {
+  background: var(--c-orange);
+}
+
+.terminal__body {
+  margin: 0;
+  padding: 22px 22px 26px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 2;
+  color: var(--text-muted-on-dark);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.terminal__prompt {
+  color: var(--c-orange);
+}
+
+.terminal__body b {
+  font-weight: 600;
+  color: var(--c-white);
+}
+
+.terminal__caret {
+  display: inline-block;
+  width: 9px;
+  height: 1.1em;
+  vertical-align: text-bottom;
+  background: var(--c-orange);
+  animation: caret 1.1s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% { opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .goal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .goal__aside {
+    max-width: 440px;
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
+/* ---------- Why choose us ---------- */
+.why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+@media (max-width: 980px) {
+  .why__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .why__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Instructor ---------- */
+.instructor__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+  max-width: 920px;
+  margin-inline: auto;
+  padding: clamp(28px, 5vw, 52px);
+  background: var(--c-black-2);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+}
+
+/* orange glow in the corner */
+.instructor__card::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -120px;
+  top: -120px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 122, 61, 0.28), transparent);
+  pointer-events: none;
+}
+
+.instructor__photo {
+  position: relative;
+  width: clamp(168px, 24vw, 240px);
+  aspect-ratio: 1;
+  padding: 6px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--c-orange), var(--c-orange-hot));
+  box-shadow: var(--glow-orange);
+}
+
+/* thin dashed orbit around the photo (brand "orbit" motif) */
+.instructor__photo::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border: 1.5px dashed rgba(255, 122, 61, 0.55);
+  border-radius: 50%;
+  animation: orbit-spin 40s linear infinite;
+}
+
+.instructor__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--c-black-2);
+}
+
+.instructor__name {
+  font-size: var(--fs-700);
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.instructor__tagline {
+  margin-top: 6px;
+  color: var(--text-muted-on-dark);
+}
+
+.credentials {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.credentials li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.7;
+}
+
+.credentials .icon {
+  margin-top: 2px;
+  color: var(--c-orange);
+}
+
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 720px) {
+  .instructor__card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .credentials li {
+    text-align: start;
+  }
+
+  .instructor .eyebrow {
+    justify-content: center;
+  }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding-block: clamp(44px, 6vw, 72px) 36px;
+  background: var(--c-black);
+  color: var(--text-on-dark);
+  text-align: center;
+}
+
+.site-footer__label {
+  margin-bottom: 26px;
+  font-size: var(--fs-300);
+  font-weight: 700;
+  color: var(--text-muted-on-dark);
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 4vw, 44px) clamp(24px, 4vw, 48px);
+}
+
+.logos img {
+  width: auto;
+  height: clamp(76px, 9vw, 104px);
+  opacity: 0.85;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.logos img:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.site-footer__bottom {
+  display: grid;
+  gap: 4px;
+  margin-top: clamp(32px, 5vw, 52px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.site-footer__title {
+  font-weight: 700;
+}
+
+.site-footer__tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+}
+
+/* ---------- Scroll-reveal + reduced-motion ----------
+   Content is only hidden when JS is running (html.js), so it never gets stuck invisible. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cards animate transform on hover too, so hand hover back once revealed */
+.js .card[data-reveal].is-visible {
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease), opacity 0.7s var(--ease);
+  transition-delay: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ===== Page shell: ordinary document scroll, one fluid layout for every screen ===== */
+:root{--safe-top:env(safe-area-inset-top,0px);--header-h:60px;--container:1120px;
+  --gutter:max(clamp(18px,5vw,40px),env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --section-pad:clamp(56px,9vw,96px);
+  --fs-500:clamp(1.05rem,1rem + .3vw,1.2rem);--fs-600:clamp(1.2rem,1.1rem + .5vw,1.5rem);
+  --fs-700:clamp(1.6rem,1.2rem + 1.8vw,2.4rem);--fs-800:clamp(1.9rem,1.3rem + 2.6vw,3.2rem)}
+html{background:var(--c-black);scroll-padding-top:calc(var(--header-h) + var(--safe-top))}
+body{overflow-x:clip}
+.site-header{height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top)}
+
+/* ===== Small screens: compact spacing for shared sections ===== */
+@media (max-width:719px){
+.section__head{margin-bottom:32px}
+.about__grid,.goal__grid{gap:36px}
+.instructor__card{padding:30px 22px;gap:24px}.instructor__photo{width:170px}
+.why__grid{gap:12px}
+.why .card{display:grid;grid-template-columns:auto 1fr;gap:2px 16px;padding:18px}.why .card__icon{grid-row:span 2;margin:0}
+.site-footer{padding-block:44px 28px}
+.logos{gap:22px 26px}.logos img{height:64px}
+.site-footer__bottom{margin-top:32px}
+}
+
+/* ===== Hero ===== */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:22px 0 64px;background:var(--gradient-orange);color:var(--c-black);clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),0 100%)}
+.hero__bg{position:absolute;inset:0;z-index:-1}
+.hero__lines{position:absolute;inset:0;background:linear-gradient(rgba(14,15,17,.07) 1px,transparent 1px) 0 0/26px 26px,linear-gradient(90deg,rgba(14,15,17,.07) 1px,transparent 1px) 0 0/26px 26px;-webkit-mask:radial-gradient(90% 55% at 50% 22%,#000,transparent);mask:radial-gradient(90% 55% at 50% 22%,#000,transparent)}
+.hero__orb{position:absolute;border-radius:50%;filter:blur(30px);animation:drift 9s ease-in-out infinite alternate}
+.hero__orb--a{width:260px;height:260px;top:60px;inset-inline-start:-90px;background:rgba(255,226,190,.6)}
+.hero__orb--b{width:220px;height:220px;bottom:90px;inset-inline-end:-80px;background:rgba(255,180,120,.55);animation-delay:-4s}
+.hero__trace{position:absolute;inset:0;width:100%;height:100%}
+.flow{stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-dasharray:3 20;animation:flow 2s linear infinite}
+.hero__inner{position:relative;display:grid;justify-items:center;text-align:center}
+.hero__inner>*{max-width:100%;animation:rise .8s var(--ease) both}
+.hero__inner>:nth-child(2){animation-delay:.08s}.hero__inner>:nth-child(3){animation-delay:.16s}.hero__inner>:nth-child(4){animation-delay:.24s}.hero__inner>:nth-child(5){animation-delay:.32s}.hero__inner>:nth-child(6){animation-delay:.4s}.hero__inner>:nth-child(7){animation-delay:.48s}
+.hero__eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border-radius:var(--radius-pill);background:var(--c-black);color:var(--c-white);font-size:.85rem;font-weight:600}
+.hero__eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--c-orange);box-shadow:0 0 10px var(--c-orange)}
+.hero__visual{position:relative;width:100%;aspect-ratio:352/290;display:grid;place-items:center;margin-top:6px}
+.hero__bg-ot{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%) rotate(-5deg);font-size:12.5rem;font-weight:900;line-height:.8;letter-spacing:-.04em;color:rgba(252,230,214,.9);user-select:none;pointer-events:none}
+.hero__orbit{position:absolute;inset:0;width:100%;height:100%;z-index:1;color:rgba(14,15,17,.6);pointer-events:none}
+.hero__mascot{position:relative;z-index:2;width:64%;margin-top:6%;animation:float 6s ease-in-out infinite;filter:drop-shadow(0 22px 26px rgba(120,30,0,.3))}
+.hero__mascot img{width:100%}
+.hero__shadow{position:absolute;bottom:1%;z-index:1;width:42%;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(14,15,17,.38),transparent);animation:shadow 6s ease-in-out infinite}
+.chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:6px;padding:6px 12px 6px 10px;border-radius:14px;background:rgba(14,15,17,.92);color:#fff;font:700 .78rem/1.2 var(--font-mono);box-shadow:0 10px 20px -10px rgba(0,0,0,.6);animation:float 5s ease-in-out infinite}
+.chip .icon{width:1.2rem;height:1.2rem;color:var(--c-orange)}
+.chip--a{top:14%;inset-inline-start:2%}.chip--b{top:46%;inset-inline-end:0;animation-delay:-1.6s}
+.hero__title{font-size:3.4rem;font-size:clamp(2.7rem,15vw,3.9rem);font-weight:900;line-height:1.12;margin-top:6px}
+.hero__title-line{display:block}
+.hero__title-line--white{color:#fff;text-shadow:0 3px 0 rgba(14,15,17,.16)}
+.hero__ot{display:inline-block;margin-inline-start:.08em;padding:0 .2em;border-radius:.2em;background:var(--c-black);color:var(--c-orange);line-height:1.05}
+.hero__lead{max-width:30ch;margin-top:14px;font-size:1.02rem;font-weight:500;line-height:1.9;color:rgba(14,15,17,.88)}
+
+/* Primary CTA */
+.hero__cta{position:relative;width:100%;margin-top:30px}
+.hero__badge{position:absolute;z-index:3;top:-13px;inset-inline-start:20px;display:inline-flex;align-items:center;gap:6px;padding:1px 12px;border-radius:99px;background:#fff;color:var(--c-black);font-size:.74rem;font-weight:800;box-shadow:0 6px 14px -6px rgba(0,0,0,.4)}
+.hero__badge i{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:blink 1.2s ease-in-out infinite}
+.cta{position:relative;display:block;overflow:hidden;padding:3px;border-radius:27px;animation:pulse 2.4s ease-out infinite;transition:transform .25s var(--ease)}
+.cta:hover{transform:translateY(-2px) scale(1.015)}.cta:active{transform:translateY(3px)}
+.cta__ring{position:absolute;inset:-70%;background:conic-gradient(#fff,#ffd29c,#0e0f11 35%,#fff 55%,#ffd29c,#0e0f11 85%,#fff);animation:spin 3.2s linear infinite}
+.cta__face{position:relative;display:flex;align-items:center;gap:14px;overflow:hidden;padding:18px 22px;border-radius:24px;background:radial-gradient(120% 170% at 100% 0,rgba(255,122,61,.42),transparent 55%),linear-gradient(160deg,#27282d,#09090b);color:#fff;text-align:start}
+.cta__shine{position:absolute;top:0;bottom:0;left:-60%;width:36%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-20deg);animation:shine 3s ease-in-out infinite}
+.cta__text{flex:1;display:grid;line-height:1.4}
+.cta__text b{font-size:1.4rem;font-weight:900}
+.cta__text em{font-style:normal;color:var(--c-orange)}
+.cta__text small{font-size:.8rem;font-weight:600;color:var(--c-orange)}
+.cta__arrow{display:grid;place-items:center;flex:none;width:52px;height:52px;border-radius:50%;background:linear-gradient(145deg,#ffa36e,var(--c-orange-hot));color:var(--c-black);box-shadow:0 0 0 4px rgba(255,122,61,.28),0 8px 18px -6px rgba(240,80,28,.9);animation:nudge 1.3s ease-in-out infinite}
+.cta__arrow .icon{width:24px;height:24px}
+
+/* Facts: compact, light pills (small next to the CTA) + small secondary links */
+.facts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%;margin-top:18px}
+.facts li{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:var(--radius-pill);background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.5);color:var(--c-black);font-size:.78rem;font-weight:700;line-height:1.5}
+.facts .icon{width:1.15em;height:1.15em;color:var(--c-black)}
+.facts small{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.facts b{font-weight:800}
+.hero__links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%;margin-top:14px}
+.hero__links .btn{padding:5px 15px;font-size:.78rem}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px)}}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes shadow{50%{transform:scale(.8);opacity:.7}}
+@keyframes drift{to{transform:translate(26px,-22px) scale(1.15)}}
+@keyframes flow{to{stroke-dashoffset:-46}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%{box-shadow:0 14px 26px -12px rgba(120,30,0,.65),0 0 0 0 rgba(255,255,255,.75)}70%,100%{box-shadow:0 14px 26px -12px rgba(120,30,0,.65),0 0 0 18px rgba(255,255,255,0)}}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+@keyframes nudge{50%{transform:translateY(5px)}}
+@keyframes blink{50%{opacity:.25}}
+
+/* ===== Event (tables) ===== */
+.event{padding-block:var(--section-pad);background:var(--gradient-orange);color:var(--c-black)}
+.event .section__title{font-size:var(--fs-700);color:var(--c-black)}
+.sched{display:grid;gap:12px}
+.days{width:calc(100% + 16px);margin-inline:-8px;table-layout:fixed;border-collapse:separate;border-spacing:8px 0}
+.days th{padding:10px 4px 0;border-radius:18px 18px 0 0;background:var(--c-black);color:var(--c-orange);font-size:.8rem;font-weight:700}
+.days td{padding:0 4px 12px;border-radius:0 0 18px 18px;background:var(--c-black);color:var(--c-white);text-align:center;line-height:1.3}
+.days b{display:block;font-size:2.6rem;font-weight:900;line-height:1.2}
+.days span{font-size:.95rem;font-weight:700;color:var(--text-muted-on-dark)}
+.info{width:100%;border-collapse:collapse;overflow:hidden;border-radius:18px;background:rgba(255,255,255,.94);box-shadow:0 12px 28px -18px rgba(14,15,17,.5)}
+.info th,.info td{padding:13px 14px;text-align:start;border-top:1px solid var(--line-light)}
+.info tr:first-child>*{border-top:0}
+.info th{width:44%;font-size:.85rem;font-weight:600;color:var(--text-muted)}
+.info td{font-weight:800;line-height:1.6}
+.lbl{display:flex;align-items:center;gap:10px}
+.info .icon{box-sizing:content-box;width:22px;height:22px;padding:6px;border-radius:12px;background:var(--c-black);color:var(--c-orange)}
+
+/* ===== Registration ===== */
+.register{overflow:hidden}
+.register::before{content:"";position:absolute;inset:-90px -90px auto;height:320px;background:radial-gradient(closest-side,rgba(255,122,61,.3),transparent);pointer-events:none}
+.register .container{position:relative}
+.countdown{display:grid;justify-items:center;gap:10px;margin-bottom:26px}
+.countdown__label{font-size:.85rem;font-weight:700;color:var(--text-muted-on-dark)}
+.countdown__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;direction:rtl}
+.countdown__cell{display:grid;justify-items:center;padding:10px 4px 8px;border-radius:16px;background:var(--c-black-3);border:1px solid var(--line-dark)}
+.countdown__num{font-size:1.7rem;font-weight:900;line-height:1.2;color:var(--c-orange);font-variant-numeric:tabular-nums}
+.countdown__unit{font-size:.75rem;color:var(--text-muted-on-dark)}
+.forms{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-card{display:flex;flex-direction:column;gap:6px;height:100%;padding:18px 14px 14px;border-radius:20px;background:var(--c-black-2);border:1px solid var(--line-dark);transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.form-card:hover{transform:translateY(-3px);border-color:var(--c-orange)}
+.form-card__icon{display:grid;place-items:center;width:46px;height:46px;margin-bottom:6px;border-radius:14px;background:var(--c-orange);color:var(--c-black)}
+.form-card h3{font-size:1.05rem;font-weight:800}
+.form-card p{flex:1;font-size:.82rem;line-height:1.7;color:var(--text-muted-on-dark)}
+.form-card .btn{margin-top:10px;padding:7px 12px;font-size:.8rem}
+.register__note{margin-top:22px;text-align:center;font-size:.82rem;color:var(--text-muted-on-dark)}
+
+/* ===== Responsive: centred single column up to tablet, two-column hero on desktop ===== */
+.hero__inner{--container:540px}
+.hero__trace path{vector-effect:non-scaling-stroke}
+.sched,.forms,.countdown,.register__note{max-width:620px;margin-inline:auto}
+@media (min-width:900px){
+  .hero{padding:56px 0 110px;clip-path:polygon(0 0,100% 0,100% calc(100% - 44px),0 100%)}
+  .hero__inner{--container:1120px;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"e v" "t v" "l v" "c v" "f v" "k v";column-gap:64px;justify-items:start;text-align:start;align-content:center}
+  .hero__eyebrow{grid-area:e}.hero__title{grid-area:t}.hero__lead{grid-area:l}
+  .hero__cta{grid-area:c;max-width:440px}.facts{grid-area:f;max-width:480px;justify-content:flex-start}.hero__links{grid-area:k;justify-content:flex-start}
+  .hero__visual{grid-area:v;align-self:center;max-width:540px;margin:0}
+  .hero__title{font-size:clamp(3.6rem,5.6vw,5.4rem)}
+  .hero__lead{max-width:34ch;font-size:1.15rem}
+}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+
+  <!-- Icon sprite: reuse with <svg class="icon"><use href="#i-name"/></svg> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-5.6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+      <symbol id="i-screen" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="2.5"/><path d="M8 20h8M12 16.5V20"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8-7.5 9.5-4.4-1.5-7.5-4.9-7.5-9.5V6L12 3z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></symbol>
+      <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><rect x="10" y="10" width="4" height="4" rx=".8"/><path d="M9.5 3.5v3M14.5 3.5v3M9.5 17.5v3M14.5 17.5v3M3.5 9.5h3M3.5 14.5h3M17.5 9.5h3M17.5 14.5h3"/></symbol>
+      <symbol id="i-sensor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14"/></symbol>
+      <symbol id="i-plc" viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 8h6M9 12h6"/><circle cx="9.5" cy="16.5" r=".9"/><circle cx="12.5" cy="16.5" r=".9"/><circle cx="15.5" cy="16.5" r=".9"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12.5" rx="2.5"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 13h17"/></symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5z"/><path d="M6.5 11.8V16c0 1.3 2.5 2.5 5.5 2.5s5.5-1.2 5.5-2.5v-4.2M21.5 9.5V14"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#top" aria-label="OT، بازگشت به بالای صفحه">
+        <span class="brand__mark" aria-hidden="true"><span>O</span><span>T</span></span>
+        <span class="brand__tag" lang="en" dir="ltr">From Digital to Real Industry</span>
+      </a>
+
+      <nav class="nav" id="site-nav" data-nav aria-label="منوی اصلی">
+        <ul class="nav__list">
+          <li><a href="#about">OT چیست؟</a></li>
+          <li><a href="#goal">هدف رویداد</a></li>
+          <li><a href="#why">چرا این دوره؟</a></li>
+          <li><a href="#instructor">مدرس</a></li>
+          <li><a href="#event">زمان و مکان</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="btn btn--orange btn--sm" href="#register">ثبت‌نام</a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-controls="site-nav" aria-expanded="false" aria-label="باز و بسته کردن منو">
+          <svg class="icon nav-toggle__open" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="icon nav-toggle__close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <i class="hero__lines"></i><i class="hero__orb hero__orb--a"></i><i class="hero__orb hero__orb--b"></i>
+        <svg class="hero__trace" viewBox="0 0 392 760" preserveAspectRatio="xMidYMin slice" focusable="false">
+          <defs><g id="tr" fill="none"><path d="M0 150h58v70h46"/><path d="M392 110h-70v80h-44"/><path d="M0 560h44v60h70"/><path d="M392 600h-50v50h-60"/></g></defs>
+          <use href="#tr" stroke="rgba(14,15,17,.2)" stroke-width="1.6"/><use href="#tr" class="flow"/>
+        </svg>
+      </div>
+      <div class="container hero__inner">
+        <p class="hero__eyebrow"><span class="hero__eyebrow-dot" aria-hidden="true"></span>سمینار آشنایی با OT و امنیت OT</p>
+
+        <div class="hero__visual" aria-hidden="false">
+          <span class="hero__bg-ot" aria-hidden="true" lang="en" dir="ltr">OT</span>
+          <svg class="hero__orbit" viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+            <g transform="rotate(-20 200 150)"><ellipse cx="200" cy="150" rx="188" ry="86" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 7"/>
+            <circle r="7" fill="#0e0f11"><animateMotion dur="9s" repeatCount="indefinite" path="M388 150A188 86 0 1 1 12 150A188 86 0 1 1 388 150"/></circle></g>
+          </svg>
+          <span class="chip chip--a" aria-hidden="true" lang="en" dir="ltr"><svg class="icon"><use href="#i-plc"/></svg>PLC</span>
+          <span class="chip chip--b" aria-hidden="true" lang="en" dir="ltr"><svg class="icon"><use href="#i-sensor"/></svg>SCADA</span>
+          <picture class="hero__mascot">
+            <source type="image/webp" srcset="assets/img/mascot.webp">
+            <img src="assets/img/mascot.png" width="1000" height="1079" fetchpriority="high" alt="ربات روح‌مانند، نماد رویداد، در حال نگه‌داشتن یک PLC">
+          </picture>
+          <span class="hero__shadow" aria-hidden="true"></span>
+        </div>
+
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__title-line hero__title-line--white">پنجره‌ای</span>
+          <span class="hero__title-line hero__title-line--black">به‌سوی <span class="hero__ot" lang="en" dir="ltr">OT</span></span>
+        </h1>
+        <p class="hero__lead">سه روز سفر از دنیای دیجیتال به قلب صنعت واقعی؛ جایی که یک خط کد می‌تواند یک خط تولید را روشن یا خاموش کند.</p>
+
+        <!-- Primary call to action: scrolls to #register -->
+        <div class="hero__cta">
+          <span class="hero__badge"><i></i>ثبت‌نام باز است</span>
+          <a class="cta" href="#register">
+            <span class="cta__ring" aria-hidden="true"></span>
+            <span class="cta__face">
+              <span class="cta__shine" aria-hidden="true"></span>
+              <span class="cta__text"><b>همین حالا <em>ثبت‌نام</em> کنید</b><small>سه روز · حضوری و آنلاین</small></span>
+              <span class="cta__arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" style="stroke-width:2.6"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+            </span>
+          </a>
+        </div>
+
+        <ul class="facts" aria-label="خلاصه رویداد"><li><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><small>تاریخ</small><b>۱۳ تا ۱۵ آبان</b></li><li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><small>ساعت</small><b>هر روز ۸ تا ۱۴</b></li><li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><small>مکان</small><b>آمفی‌تئاتر دانشکده مهندسی</b></li></ul>
+
+        <div class="hero__links">
+          <a class="btn btn--dark" href="#event">زمان و مکان</a>
+          <a class="btn btn--outline-dark" href="#about">OT چیست؟</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ About OT ============ -->
+    <section class="section section--light about" id="about" aria-labelledby="about-title">
+      <div class="container about__grid">
+        <div class="about__text" data-reveal>
+          <p class="eyebrow">OT چیست؟</p>
+          <h2 class="section__title" id="about-title">OT؛ جایی که دنیای دیجیتال به صنعت واقعی می‌رسد</h2>
+          <p class="section__lead">OT یا «فناوری عملیاتی» (<span lang="en" dir="ltr">Operational Technology</span>) همان سخت‌افزار و نرم‌افزاری است که ماشین‌ها و فرایندهای فیزیکی را پایش و کنترل می‌کند؛ از خط تولید کارخانه و پالایشگاه تا شبکه برق و تصفیه‌خانه آب.</p>
+          <p class="about__note">اگر IT با اطلاعات سروکار دارد، OT کاری می‌کند که چرخ‌های صنعت بچرخند. برای همین یک خطای امنیتی در آن فقط یک داده را به خطر نمی‌اندازد؛ می‌تواند روی دنیای فیزیکی اثر بگذارد.</p>
+          <ul class="pills" aria-label="سه واژهٔ کلیدی">
+            <li>اتوماسیون</li>
+            <li>کنترل</li>
+            <li>صنعت</li>
+          </ul>
+        </div>
+
+        <div class="about__visual">
+          <p class="about__caption" data-reveal>یک چرخهٔ ساده در OT</p>
+          <ol class="chain">
+            <li class="chain__item" data-reveal>
+              <span class="chain__icon"><svg class="icon" aria-hidden="true"><use href="#i-sensor"/></svg></span>
+              <h3 class="chain__title">سنسور</h3>
+              <p class="chain__text">محیط را حس می‌کند: دما، فشار، سطح، سرعت…</p>
+            </li>
+            <li class="chain__item" data-reveal>
+              <span class="chain__icon"><svg class="icon" aria-hidden="true"><use href="#i-plc"/></svg></span>
+              <h3 class="chain__title" lang="en" dir="ltr">PLC</h3>
+              <p class="chain__text">داده را پردازش می‌کند و تصمیم می‌گیرد.</p>
+            </li>
+            <li class="chain__item" data-reveal>
+              <span class="chain__icon"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg></span>
+              <h3 class="chain__title">عملگر</h3>
+              <p class="chain__text">فرمان را اجرا می‌کند: موتور، شیر، پمپ…</p>
+            </li>
+          </ol>
+          <p class="about__caption about__caption--foot" data-reveal>از حس‌کردن تا اجرا؛ حلقه‌ای که صنعت را زنده نگه می‌دارد.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Goal ============ -->
+    <section class="section section--dark goal" id="goal" aria-labelledby="goal-title">
+      <div class="container goal__grid">
+        <div class="goal__text">
+          <div data-reveal>
+            <p class="eyebrow">هدف ما</p>
+            <h2 class="section__title" id="goal-title">چرا این رویداد را برگزار می‌کنیم؟</h2>
+            <p class="section__lead">صنعت هر روز بیشتر به شبکه و نرم‌افزار وصل می‌شود و این پرسش را پیش می‌آورد: چه کسی از این سیستم‌ها مراقبت می‌کند؟ ما می‌خواهیم نسل بعدی پاسخ این پرسش باشد.</p>
+          </div>
+
+          <ol class="goal__list">
+            <li class="goal__item" data-reveal>
+              <span class="goal__num" aria-hidden="true">۱</span>
+              <div>
+                <h3>آشنایی از پایه</h3>
+                <p>دانشجویان و علاقه‌مندان با مفاهیم <span lang="en" dir="ltr">OT</span>، <span lang="en" dir="ltr">PLC</span> و <span lang="en" dir="ltr">SCADA</span> آشنا شوند و تصویر روشنی از صنعت پیدا کنند.</p>
+              </div>
+            </li>
+            <li class="goal__item" data-reveal>
+              <span class="goal__num" aria-hidden="true">۲</span>
+              <div>
+                <h3>پل میان IT و صنعت</h3>
+                <p>فاصلهٔ دنیای شبکه و نرم‌افزار را با دنیای تجهیزات و فرایندهای صنعتی کم کنیم.</p>
+              </div>
+            </li>
+            <li class="goal__item" data-reveal>
+              <span class="goal__num" aria-hidden="true">۳</span>
+              <div>
+                <h3>نگاه امنیتی</h3>
+                <p>بفهمیم چرا امنیت <span lang="en" dir="ltr">OT</span> با امنیت <span lang="en" dir="ltr">IT</span> فرق دارد و چرا بعضی تهدیدها دیده نمی‌شوند.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <figure class="goal__aside" data-reveal>
+          <div class="terminal" aria-hidden="true" lang="en" dir="ltr">
+            <div class="terminal__bar"><span></span><span></span><span></span></div>
+            <pre class="terminal__body"><span class="terminal__prompt">&gt;</span> access: <b>denied</b>
+<span class="terminal__prompt">&gt;</span> scan...
+<span class="terminal__prompt">&gt;</span> threat: <b>none</b>
+<span class="terminal__prompt">&gt;</span> system: <b>secure</b>
+<span class="terminal__prompt">&gt;</span> <i class="terminal__caret"></i></pre>
+          </div>
+          <figcaption>برخی تهدیدها دیده نمی‌شوند.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ Why choose us ============ -->
+    <section class="section section--light why" id="why" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section__head section__head--center" data-reveal>
+          <p class="eyebrow">چرا این دوره؟</p>
+          <h2 class="section__title" id="why-title">چرا باید این دوره را انتخاب کنید؟</h2>
+          <p class="section__lead">چون <span lang="en" dir="ltr">OT</span> را از دل صنعت یاد می‌گیرید، نه فقط از روی اسلاید.</p>
+        </div>
+
+        <ul class="why__grid">
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg></span>
+            <h3 class="card__title">مدرسی از قلب صنعت</h3>
+            <p class="card__text">از کسی یاد بگیرید که در دل پروژه‌های امنیت صنعتی کار می‌کند، نه از کسی که فقط دربارهٔ آن‌ها خوانده است.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <h3 class="card__title">سه روز، تمرکز کامل</h3>
+            <p class="card__text">هر روز از ۸ تا ۱۴؛ آن‌قدر فشرده که واقعاً چیزی یاد بگیرید و آن‌قدر کوتاه که زندگی‌تان متوقف نشود.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg></span>
+            <h3 class="card__title">حضوری یا آنلاین؛ انتخاب با شما</h3>
+            <p class="card__text">در آمفی‌تئاتر دانشکده مهندسی بنشینید یا از هر کجا آنلاین همراه شوید. هر دو راه به همین سمت می‌رسد.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg></span>
+            <h3 class="card__title">شروع از پایه، بدون ترس</h3>
+            <p class="card__text">از مفاهیم اولیه شروع می‌کنیم تا اگر اولین بار است با <span lang="en" dir="ltr">OT</span> روبه‌رو می‌شوید، گم نشوید.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-plc"/></svg></span>
+            <h3 class="card__title">آشنایی با ابزار واقعی صنعت</h3>
+            <p class="card__text"><span lang="en" dir="ltr">PLC</span>، <span lang="en" dir="ltr">SCADA</span> و شبکه‌های صنعتی؛ همان ابزارهایی که کارخانه‌ها و زیرساخت‌ها را می‌گردانند.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <h3 class="card__title">دریچه‌ای به مسیری تازه</h3>
+            <p class="card__text">امنیت <span lang="en" dir="ltr">OT</span> یکی از حیاتی‌ترین شاخه‌های امنیت سایبری است؛ این رویداد می‌تواند اولین قدم شما در آن باشد.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Instructor ============ -->
+    <section class="section section--dark instructor" id="instructor" aria-labelledby="instructor-title">
+      <div class="container">
+        <div class="instructor__card" data-reveal>
+          <div class="instructor__photo">
+            <img src="assets/img/instructor.jpg" width="480" height="480" loading="lazy"
+                 alt="علی صالحی فیروزآبادی، مدرس دوره">
+          </div>
+
+          <div class="instructor__body">
+            <p class="eyebrow">مدرس دوره</p>
+            <h2 class="instructor__name" id="instructor-title">علی صالحی فیروزآبادی</h2>
+            <p class="instructor__tagline">تجربهٔ امنیت صنعتی، مستقیم از میدان.</p>
+
+            <ul class="credentials">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>مدیر بخش امنیت صنعتی شرکت امن گستران فرزان</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-plc"/></svg>متخصص سامانه‌های اسکادا و شبکه‌های صنعتی</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>کارشناسی مهندسی الکترونیک</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>کارشناسی ارشد مهندسی مکاترونیک</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Event details ============ -->
+    <section class="event" id="event" aria-labelledby="event-title">
+      <div class="container">
+        <div class="section__head section__head--center" data-reveal>
+          <p class="eyebrow eyebrow--dark">زمان و مکان</p>
+          <h2 class="section__title" id="event-title">همین حالا تقویم‌تان را علامت بزنید</h2>
+        </div>
+        <div class="sched" data-reveal>
+          <table class="days" aria-label="روزهای برگزاری">
+            <thead><tr><th scope="col">روز اول</th><th scope="col">روز دوم</th><th scope="col">روز سوم</th></tr></thead>
+            <tbody><tr><td><b>۱۳</b><span>آبان</span></td><td><b>۱۴</b><span>آبان</span></td><td><b>۱۵</b><span>آبان</span></td></tr></tbody>
+          </table>
+          <table class="info"><tbody>
+            <tr><th scope="row"><span class="lbl"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>ساعت</span></th><td>هر روز ۸ الی ۱۴</td></tr>
+            <tr><th scope="row"><span class="lbl"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>مکان</span></th><td>آمفی‌تئاتر دانشکده مهندسی</td></tr>
+            <tr><th scope="row"><span class="lbl"><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg>نحوهٔ شرکت</span></th><td>حضوری و آنلاین</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Registration ============ -->
+    <section class="section section--dark register" id="register" aria-labelledby="register-title">
+      <div class="container">
+        <div class="section__head section__head--center" data-reveal>
+          <p class="eyebrow">ثبت‌نام</p>
+          <h2 class="section__title" id="register-title">جای خودتان را در سمینار نگه دارید</h2>
+          <p class="section__lead">فرم مناسب را انتخاب کنید و ثبت‌نام‌تان را کامل کنید.</p>
+        </div>
+
+        <!-- Hidden automatically once the event starts (date set in the script at the bottom) -->
+        <div class="countdown" data-countdown data-reveal>
+          <p class="countdown__label">تا شروع رویداد</p>
+          <div class="countdown__grid" role="timer" aria-live="off">
+            <div class="countdown__cell"><span class="countdown__num" data-unit="days">۰۰</span><span class="countdown__unit">روز</span></div>
+            <div class="countdown__cell"><span class="countdown__num" data-unit="hours">۰۰</span><span class="countdown__unit">ساعت</span></div>
+            <div class="countdown__cell"><span class="countdown__num" data-unit="minutes">۰۰</span><span class="countdown__unit">دقیقه</span></div>
+            <div class="countdown__cell"><span class="countdown__num" data-unit="seconds">۰۰</span><span class="countdown__unit">ثانیه</span></div>
+          </div>
+        </div>
+
+        <!-- TODO: replace the two example.com links below with the real registration form links -->
+        <ul class="forms">
+          <li data-reveal>
+            <a class="form-card" href="https://example.com/registration-form-1" target="_blank" rel="noopener">
+              <span class="form-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <h3>ثبت‌نام حضوری</h3>
+              <p>در آمفی‌تئاتر دانشکده مهندسی کنار ما باشید.</p>
+              <span class="btn btn--orange">ورود به فرم</span>
+            </a>
+          </li>
+          <li data-reveal>
+            <a class="form-card" href="https://example.com/registration-form-2" target="_blank" rel="noopener">
+              <span class="form-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg></span>
+              <h3>ثبت‌نام آنلاین</h3>
+              <p>از هر کجا آنلاین همراه شوید.</p>
+              <span class="btn btn--orange">ورود به فرم</span>
+            </a>
+          </li>
+        </ul>
+        <p class="register__note" data-reveal>۱۳ تا ۱۵ آبان · هر روز ۸ الی ۱۴ · آمفی‌تئاتر دانشکده مهندسی</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="site-footer__label">برگزارکنندگان</p>
+      <ul class="logos">
+        <li><img src="assets/img/logos/bu-ali-sina.png" alt="دانشگاه بوعلی‌سینا" loading="lazy" height="96"></li>
+        <li><img src="assets/img/logos/anjoman-bargh.png" alt="انجمن علمی مهندسی برق دانشگاه بوعلی‌سینا" loading="lazy" height="96"></li>
+        <li><img src="assets/img/logos/anjoman-computer.png" alt="انجمن علمی کامپیوتر" loading="lazy" height="96"></li>
+        <li><img src="assets/img/logos/bu-ali-sina-cert.png" alt="تیم واکنش به حوادث رایانه‌ای دانشگاه بوعلی‌سینا (مرکز تخصصی آپا)" loading="lazy" height="96"></li>
+        <li><img src="assets/img/logos/anjoman-ramz.png" alt="انجمن رمز ایران، شاخهٔ دانشجویی دانشگاه بوعلی‌سینا" loading="lazy" height="96"></li>
+        <li><img src="assets/img/logos/wifi-mark.png" alt="آرم همکار" loading="lazy" height="96"></li>
+      </ul>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__title">پنجره‌ای به‌سوی <span lang="en" dir="ltr">OT</span> · سمینار آشنایی با <span lang="en" dir="ltr">OT</span> و امنیت <span lang="en" dir="ltr">OT</span></p>
+        <p class="site-footer__tag" lang="en" dir="ltr">From Digital to Real Industry</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+  // Event start (13 Aban, 08:00 Tehran time). The countdown hides itself after this moment.
+  var EVENT_START = '2026-11-04T08:00:00+03:30';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+  var behavior = reduce ? 'auto' : 'smooth';
+
+  // Smooth in-page links 
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    var t = id && document.getElementById(id);
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: behavior, block: 'start' });
+  });
+
+  // Mobile menu
+  var nav = document.querySelector('[data-nav]');
+  var toggle = document.querySelector('[data-nav-toggle]');
+  function setOpen(o) { nav.dataset.open = String(o); toggle.setAttribute('aria-expanded', String(o)); }
+  toggle.addEventListener('click', function () { setOpen(nav.dataset.open !== 'true'); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+  // Highlight the nav link of the section in view
+  if (hasIO) {
+    var links = {};
+    nav.querySelectorAll('a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        Object.keys(links).forEach(function (id) { links[id].classList.toggle('is-active', id === en.target.id); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['top'].concat(Object.keys(links)).forEach(function (id) { var s = document.getElementById(id); if (s) spy.observe(s); });
+  }
+
+  // Scroll reveal
+  var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (!hasIO || reduce) {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    items.forEach(function (el) {
+      var sib = [].filter.call(el.parentElement.children, function (c) { return c.hasAttribute('data-reveal'); });
+      el.style.setProperty('--reveal-delay', Math.min(sib.indexOf(el), 5) * 70 + 'ms');
+    });
+    var rev = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-visible'); obs.unobserve(en.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { rev.observe(el); });
+  }
+
+  // Countdown
+  var cd = document.querySelector('[data-countdown]');
+  var target = Date.parse(EVENT_START);
+  if (cd) {
+    if (isNaN(target)) { cd.hidden = true; }
+    else {
+      var fmt = new Intl.NumberFormat('fa-IR', { minimumIntegerDigits: 2, useGrouping: false });
+      var cell = function (u) { return cd.querySelector('[data-unit="' + u + '"]'); };
+      var timer;
+      var render = function () {
+        var d = target - Date.now();
+        if (d <= 0) { cd.hidden = true; clearInterval(timer); return; }
+        cell('days').textContent = fmt.format(Math.floor(d / 864e5));
+        cell('hours').textContent = fmt.format(Math.floor(d % 864e5 / 36e5));
+        cell('minutes').textContent = fmt.format(Math.floor(d % 36e5 / 6e4));
+        cell('seconds').textContent = fmt.format(Math.floor(d % 6e4 / 1e3));
+      };
+      timer = setInterval(render, 1000);
+      render();
+    }
+  }
+
+  // SVG (SMIL) animations ignore CSS, so honour reduced-motion here
+  if (reduce) document.querySelectorAll('svg').forEach(function (s) { if (s.pauseAnimations) s.pauseAnimations(); });
+})();
+</script>
+</body>
+</html>
