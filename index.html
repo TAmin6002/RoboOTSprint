@@ -1125,55 +1125,79 @@ body{overflow-x:clip}
 .info .icon{box-sizing:content-box;width:22px;height:22px;padding:6px;border-radius:12px;background:var(--c-black);color:var(--c-orange)}
 
 /* ===== Registration ===== */
-.register{overflow:hidden}
+.register{overflow:hidden;padding-block:clamp(40px,7vw,72px)}
 .register::before{content:"";position:absolute;inset:-90px -90px auto;height:320px;background:radial-gradient(closest-side,rgba(255,122,61,.3),transparent);pointer-events:none}
 .register .container{position:relative}
-.countdown{display:grid;justify-items:center;gap:10px;margin-bottom:26px}
+.countdown{display:grid;justify-items:center;gap:8px;margin-bottom:20px}
 .countdown__label{font-size:.85rem;font-weight:700;color:var(--text-muted-on-dark)}
 .countdown__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;direction:rtl}
-.countdown__cell{display:grid;justify-items:center;padding:10px 4px 8px;border-radius:16px;background:var(--c-black-3);border:1px solid var(--line-dark)}
+.countdown__cell{display:grid;justify-items:center;padding:8px 4px 6px;border-radius:16px;background:var(--c-black-3);border:1px solid var(--line-dark)}
 .countdown__num{font-size:1.7rem;font-weight:900;line-height:1.2;color:var(--c-orange);font-variant-numeric:tabular-nums}
 .countdown__unit{font-size:.75rem;color:var(--text-muted-on-dark)}
-.forms{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-card{display:flex;flex-direction:column;gap:6px;height:100%;padding:18px 14px 14px;border-radius:20px;background:var(--c-black-2);border:1px solid var(--line-dark);transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.forms{display:grid;grid-template-columns:1fr;gap:10px}
+.forms>li{display:flex}
+.form-card{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"i t b" "i p b";align-items:center;align-content:center;column-gap:12px;width:100%;padding:12px 14px;border-radius:20px;background:var(--c-black-2);border:1px solid var(--line-dark);transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease)}
 .form-card:hover{transform:translateY(-3px);border-color:var(--c-orange)}
-.form-card__icon{display:grid;place-items:center;width:46px;height:46px;margin-bottom:6px;border-radius:14px;background:var(--c-orange);color:var(--c-black)}
-.form-card h3{font-size:1.05rem;font-weight:800}
-.form-card p{flex:1;font-size:.82rem;line-height:1.7;color:var(--text-muted-on-dark)}
-.form-card .btn{margin-top:10px;padding:7px 12px;font-size:.8rem}
-.register__note{margin-top:22px;text-align:center;font-size:.82rem;color:var(--text-muted-on-dark)}
+.form-card__icon{grid-area:i;display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--c-orange);color:var(--c-black)}
+.form-card h3{grid-area:t;font-size:1rem;font-weight:800;line-height:1.5}
+.form-card p{grid-area:p;font-size:.8rem;line-height:1.6;color:var(--text-muted-on-dark)}
+.form-card .btn{grid-area:b;padding:7px 14px;font-size:.8rem}
+@media (max-width:359px){.form-card{grid-template-columns:auto 1fr;grid-template-areas:"i t" "i p" "b b"}.form-card .btn{margin-top:10px}}
+.register__note{margin-top:16px;text-align:center;font-size:.82rem;color:var(--text-muted-on-dark)}
 
-/* Pricing (inside the registration section, above the forms) */
-.pricing,.contact{max-width:620px;margin-inline:auto}
-.pricing{position:relative;overflow:hidden;margin-bottom:14px;padding:24px 14px 14px;border-radius:24px;background:var(--c-black-2);border:1px solid var(--line-dark)}
+/* Pricing + forms share one compact frame: stacked on phones, side by side on desktop */
+.register__body{display:grid;gap:12px;max-width:620px;margin-inline:auto}
+.pricing{position:relative;overflow:hidden;padding:18px 12px 12px;border-radius:22px;background:var(--c-black-2);border:1px solid var(--line-dark)}
 .pricing::before{content:"";position:absolute;top:-70px;inset-inline-end:-70px;width:220px;height:220px;background:radial-gradient(closest-side,rgba(255,122,61,.22),transparent);pointer-events:none}
 .pricing>*{position:relative}
-.pricing__title{text-align:center;font-size:var(--fs-600);font-weight:800}
-.pricing__badge{display:flex;align-items:center;justify-content:center;gap:8px;width:fit-content;max-width:100%;margin:12px auto 0;padding:6px 16px;border-radius:var(--radius-pill);background:rgba(255,122,61,.14);border:1px solid rgba(255,122,61,.45);color:var(--c-orange);font-size:.82rem;font-weight:700;line-height:1.6;text-align:center}
-.pricing__badge .icon{width:1.25em;height:1.25em}
-.pricing__list{display:grid;gap:10px;margin-top:20px}
-.pricing__row{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;padding:14px;border-radius:16px;background:var(--c-black-3);border:1px solid var(--line-dark);transition:border-color var(--dur) var(--ease)}
+.pricing__title{text-align:center;font-size:1.25rem;font-weight:800;line-height:1.4}
+.pricing__badge{display:flex;align-items:center;justify-content:center;gap:8px;width:fit-content;max-width:100%;margin:8px auto 0;padding:4px 14px;border-radius:var(--radius-pill);background:rgba(255,122,61,.14);border:1px solid rgba(255,122,61,.45);color:var(--c-orange);font-size:.78rem;font-weight:700;line-height:1.6;text-align:center}
+.pricing__badge .icon{width:1.2em;height:1.2em}
+.pricing__list{display:grid;gap:8px;margin-top:14px}
+.pricing__row{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;padding:9px 12px;border-radius:14px;background:var(--c-black-3);border:1px solid var(--line-dark);transition:border-color var(--dur) var(--ease)}
 .pricing__row:hover{border-color:var(--c-orange)}
-.pricing__label{display:flex;align-items:center;gap:10px;flex:1;min-width:0;font-size:.92rem;font-weight:700;line-height:1.7}
-.pricing__label::before{content:"";flex:none;width:9px;height:9px;border-radius:2px;background:var(--c-orange);transform:rotate(45deg)}
+.pricing__label{display:flex;align-items:center;gap:10px;flex:1;min-width:0;font-size:.88rem;font-weight:700;line-height:1.6}
+.pricing__label::before{content:"";flex:none;width:8px;height:8px;border-radius:2px;background:var(--c-orange);transform:rotate(45deg)}
 .pricing__price{display:flex;align-items:baseline;gap:8px;flex:none;white-space:nowrap}
-.pricing__old{position:relative;font-size:.92rem;font-weight:600;line-height:1.4;color:rgba(247,246,242,.62);text-decoration:none}
+.pricing__old{position:relative;font-size:.85rem;font-weight:600;line-height:1.4;color:rgba(247,246,242,.62);text-decoration:none}
 .pricing__old::after{content:"";position:absolute;inset-inline:-3px;top:54%;height:2px;border-radius:2px;background:var(--c-orange);transform:rotate(-5deg)}
-.pricing__new{font-size:1.4rem;font-weight:900;line-height:1.2;color:var(--c-orange);text-decoration:none;font-variant-numeric:tabular-nums}
-@media (max-width:519px){.pricing__price{flex-direction:column;align-items:center;gap:0;min-width:5.2rem}}
+.pricing__new{font-size:1.3rem;font-weight:900;line-height:1.2;color:var(--c-orange);text-decoration:none;font-variant-numeric:tabular-nums}
+@media (max-width:379px){.pricing__price{flex-direction:column;align-items:center;gap:0;min-width:5rem}.pricing__badge{gap:6px;padding:4px 10px;font-size:.72rem}}
 
-/* Contact (Telegram) */
-.contact{display:grid;justify-items:center;gap:10px;margin-top:26px;text-align:center}
-.contact__label{font-size:.85rem;font-weight:700;color:var(--text-muted-on-dark)}
-.contact__label--closing{margin-top:14px}
-.contact__link{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:var(--radius-pill);background:var(--c-black-2);border:1px solid var(--line-dark);font-size:.95rem;font-weight:700;direction:ltr;transition:transform var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
-.contact__link .icon{width:1.2em;height:1.2em;color:var(--c-orange)}
-.contact__link:hover{transform:translateY(-2px);border-color:var(--c-orange);color:var(--c-orange)}
+/* Contact: its own section; one soft, rounded orange card (same gradient as the hero/event), no extra shapes */
+.contact{padding-block:0;text-align:center}
+.contact__card{max-width:720px;margin-inline:auto;padding:clamp(30px,5vw,46px) clamp(20px,4vw,40px);border-radius:32px;background:linear-gradient(165deg,#f65f26 0%,#ff7a3d 60%,#ff9a63 100%);color:var(--c-black);box-shadow:0 26px 54px -28px rgba(255,122,61,.65),inset 0 1px 0 rgba(255,255,255,.35)}
+.contact__card .section__title{font-size:var(--fs-700);color:var(--c-black)}
+.contact__links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+.contact__link{display:inline-flex;align-items:center;gap:10px;padding:12px 26px;border-radius:var(--radius-pill);background:var(--c-black);color:var(--c-white);font-size:1.02rem;font-weight:700;direction:ltr;box-shadow:0 12px 22px -12px rgba(14,15,17,.7);transition:transform var(--dur) var(--ease),background-color var(--dur) var(--ease),color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.contact__link .icon{width:1.2em;height:1.2em;color:var(--c-orange);transition:color var(--dur) var(--ease)}
+.contact__link:hover{transform:translateY(-3px);background:var(--c-pure-white);color:var(--c-black);box-shadow:0 16px 26px -12px rgba(14,15,17,.55)}
+.contact__link:hover .icon{color:var(--c-orange-hot)}
+.contact__closing{margin-top:22px;font-weight:700;color:rgba(14,15,17,.82)}
 
 /* ===== Responsive: centred single column up to tablet, two-column hero on desktop ===== */
 .hero__inner{--container:540px}
 .hero__trace path{vector-effect:non-scaling-stroke}
 .sched,.forms,.countdown,.register__note{max-width:620px;margin-inline:auto}
+@media (min-width:900px){
+  .register .section__head{max-width:none;margin-bottom:24px}
+  .register .section__title{font-size:var(--fs-700)}
+  .register__body{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:16px;max-width:1040px}
+  .pricing{padding:26px 22px 20px}
+  .pricing__title{font-size:1.5rem}
+  .pricing__badge{font-size:.85rem;padding:5px 16px}
+  .pricing__list{gap:10px;margin-top:18px}
+  .pricing__row{padding:13px 18px}
+  .pricing__label{font-size:.98rem}
+  .pricing__old{font-size:.92rem}
+  .pricing__new{font-size:1.5rem}
+  .register__body .forms{grid-template-rows:1fr 1fr;gap:16px}
+  .form-card{padding:18px 20px;column-gap:16px}
+  .form-card__icon{width:52px;height:52px;border-radius:16px}
+  .form-card h3{font-size:1.15rem}
+  .form-card p{font-size:.88rem}
+  .form-card .btn{padding:9px 20px;font-size:.88rem}
+}
 @media (min-width:900px){
   .hero{padding:56px 0 110px;clip-path:polygon(0 0,100% 0,100% calc(100% - 44px),0 100%)}
   .hero__inner{--container:1120px;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"e v" "t v" "l v" "c v" "f v" "k v";column-gap:64px;justify-items:start;text-align:start;align-content:center}
@@ -1491,6 +1515,7 @@ body{overflow-x:clip}
           </div>
         </div>
 
+        <div class="register__body">
         <!-- Pricing: struck-through = regular price, orange = early-bird price -->
         <div class="pricing" data-reveal>
           <h3 class="pricing__title">هزینه ثبت‌نام</h3>
@@ -1534,13 +1559,22 @@ body{overflow-x:clip}
             </a>
           </li>
         </ul>
+        </div>
         <p class="register__note" data-reveal>۲۰ تا ۲۲ آبان · هر روز ۸ الی ۱۴ · آمفی‌تئاتر دانشکده مهندسی</p>
 
-        <div class="contact" data-reveal>
-          <p class="contact__label">ارتباط با ما</p>
-          <a class="contact__link" href="https://t.me/SSCE_Admin" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg><span>@SSCE_Admin</span></a>
-          <p class="contact__label contact__label--closing">منتظر حضور ارزشمند شما هستیم ✨</p>
-          <a class="contact__link" href="https://t.me/SSCES" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg><span>@SSCES</span></a>
+      </div>
+    </section>
+
+    <!-- ============ Contact ============ -->
+    <section class="section section--dark contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact__card" data-reveal>
+          <h2 class="section__title" id="contact-title">ارتباط با ما</h2>
+          <div class="contact__links">
+            <a class="contact__link" href="https://t.me/SSCE_Admin" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg><span>@SSCE_Admin</span></a>
+            <a class="contact__link" href="https://t.me/SSCES" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg><span>@SSCES</span></a>
+          </div>
+          <p class="contact__closing">منتظر حضور ارزشمند شما هستیم ✨</p>
         </div>
       </div>
     </section>
