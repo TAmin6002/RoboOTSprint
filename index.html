@@ -1111,6 +1111,20 @@ body{overflow-x:clip}
 .event{padding-block:var(--section-pad);background:var(--gradient-orange);color:var(--c-black)}
 .event .section__title{font-size:var(--fs-700);color:var(--c-black)}
 .sched{display:grid;gap:12px}
+.cal-link{color:inherit;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:.22em;text-decoration-skip-ink:none;cursor:pointer;
+  padding:.02em .18em;margin-inline:-.18em;border-radius:.35em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  transition:background-color .3s var(--ease),color .3s var(--ease),text-decoration-color .3s var(--ease)}
+.cal-link__end{white-space:nowrap}
+@media (min-width:600px){.cal-link{white-space:nowrap}}
+.cal-link__icon{display:inline-block;box-sizing:content-box;width:.55em;height:.55em;padding:.2em;margin-inline-start:.28em;border-radius:50%;
+  background:var(--c-black);color:var(--c-orange);vertical-align:-.12em;stroke-width:2.2;
+  transition:transform .35s var(--ease),background-color .35s var(--ease),color .35s var(--ease)}
+.cal-link:hover,.cal-link:focus-visible{background-color:var(--c-black);color:var(--c-orange);text-decoration-color:transparent}
+.cal-link:hover .cal-link__icon,.cal-link:focus-visible .cal-link__icon{background:var(--c-orange);color:var(--c-black);transform:scale(1.12) rotate(-8deg)}
+.cal-link:active{transform:translateY(1px)}
+.event__hint{margin:14px auto 0;max-width:36ch;text-wrap:balance;font-size:.82rem;font-weight:600;line-height:1.7;color:rgba(14,15,17,.72)}
+@media (prefers-reduced-motion:reduce){.cal-link,.cal-link__icon{transition:none}.cal-link:hover .cal-link__icon,.cal-link:focus-visible .cal-link__icon{transform:none}}
 .days{width:calc(100% + 16px);margin-inline:-8px;table-layout:fixed;border-collapse:separate;border-spacing:8px 0}
 .days th{padding:10px 4px 0;border-radius:18px 18px 0 0;background:var(--c-black);color:var(--c-orange);font-size:.8rem;font-weight:700}
 .days td{padding:0 4px 12px;border-radius:0 0 18px 18px;background:var(--c-black);color:var(--c-white);text-align:center;line-height:1.3}
@@ -1518,7 +1532,7 @@ body{overflow-x:clip}
         <div class="section__head section__head--center" data-reveal>
           <p class="eyebrow">ویدئو</p>
           <h2 class="section__title" id="videos-title">نگاهی به دنیای <span lang="en" dir="ltr">OT</span></h2>
-          <p class="section__lead">جایی که دنیای دیجیتال به ماشین‌ها، کارخانه‌ها و زیرساخت‌های واقعی می‌رسد. یک قدم به قلب این دنیا نزدیک‌تر شوید.</p>
+          <p class="section__lead">جایی که دنیای دیجیتال به ماشین‌ها، کارخانه‌ها و زیرساخت‌های واقعی می‌رسد. پیش از سمینار، یک قدم به قلب این دنیا نزدیک‌تر شوید.</p>
         </div>
 
         <ul class="videos__grid">
@@ -1563,7 +1577,8 @@ body{overflow-x:clip}
       <div class="container">
         <div class="section__head section__head--center" data-reveal>
           <p class="eyebrow eyebrow--dark">زمان و مکان</p>
-          <h2 class="section__title" id="event-title">همین حالا تقویم‌تان را علامت بزنید</h2>
+          <h2 class="section__title" id="event-title">همین حالا <a class="cal-link" href="https://calendar.google.com/calendar/r?cid=ODk5NGU0OWIyMTRkMjk2ODU4MTQyZmI0MDhmOTI2YzU4YTE5OGQ0NjgyYmE3NGQxOGY5NTgyOWM1ZDI5NWNhM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t" target="_blank" rel="noopener noreferrer" aria-label="تقویم‌تان را علامت بزنید؛ افزودن سمینار به گوگل کلندر (در تب جدید باز می‌شود)">تقویم‌تان را علامت <span class="cal-link__end">بزنید<svg class="icon cal-link__icon" aria-hidden="true"><use href="#i-calendar"/></svg></span></a></h2>
+          <p class="event__hint">روی عبارت بالا بزنید تا سمینار به گوگل کلندر شما اضافه شود.</p>
         </div>
         <div class="sched" data-reveal>
           <table class="days" aria-label="روزهای برگزاری">
@@ -1603,7 +1618,7 @@ body{overflow-x:clip}
         <!-- Pricing: struck-through = regular price, orange = early-bird price -->
         <div class="pricing" data-reveal>
           <h3 class="pricing__title">هزینه ثبت‌نام</h3>
-          <p class="pricing__badge"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>تخفیف ثبت‌نام زودهنگام تا<br class="pricing__br"> <strong class="pricing__date">۱۸ آبان‌ماه</strong> تمدید شد.</span></p>
+          <p class="pricing__badge"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>تخفیف ثبت‌نام تا<br class="pricing__br"> <strong class="pricing__date">۱۸ آبان‌ماه</strong> تمدید شد.</span></p>
           <ul class="pricing__list">
             <li class="pricing__row">
               <span class="pricing__label">دانشگاه بوعلی و دانشگاه‌های استان همدان</span>
